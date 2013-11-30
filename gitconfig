@@ -1,0 +1,8 @@
+[user]
+	name = Renato \"Lond\" Cerqueira
+	email = renato.lond@gmail.com
+[alias]
+  ci = commit
+  st = status
+  co = checkout
+  sdiff = diff --cached
