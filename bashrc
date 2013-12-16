@@ -11,7 +11,7 @@ fi
 PS1="[$Green\u$Color_Off $Blue\w$Color_Off]"
 # Define git stuff, if is in a git folder, it shows the name of the branch.
 # And color it yellow when have no changes, and red if there is.
-export PS1=$PS1'$(git branch &>/dev/null;\
+PS1=$PS1'$(git branch &>/dev/null;\
 if [ $? -eq 0 ]; then \
   echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
   if [ "$?" -eq "0" ]; then \
@@ -20,11 +20,9 @@ if [ $? -eq 0 ]; then \
   else \
     # @5 - Changes to working tree
     echo "'$IRed'"$(__git_ps1 " (%s)"); \
-  fi) '$Color_Off'\$ "; \
-else \
-  # @2 - Prompt when not in GIT repo
-  echo " '$Color_Off'\$ "; \
+  fi)"; \
 fi)'
+export PS1=$PS1$Color_Off' \$ ';
 
 # git aliases and functions
 alias pega="git fetch origin; git pull --rebase origin \$(parse_git_branch)"
