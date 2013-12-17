@@ -8,7 +8,7 @@ if [ -f ~/config/bashcolors ]; then
 fi
 
 # Define basic PS1 with coloring: [User ~/Folder]
-PS1="[$Green\u$Color_Off $Blue\w$Color_Off]"
+PS1="[$Green\u$Color_Off@$Cyan\h$Color_Off $Blue\w$Color_Off]"
 # Define git stuff, if is in a git folder, it shows the name of the branch.
 # And color it yellow when have no changes, and red if there is.
 PS1=$PS1'$(git branch &>/dev/null;\
