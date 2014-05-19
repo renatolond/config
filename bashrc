@@ -3,6 +3,14 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
+vimgitshow() {
+  if [[ -z "$2" ]] ; then
+	git show "$1" | vim - "+set filetype=${1##*.}";
+  else
+	git show $2:"$1" | vim - "+set filetype=${1##*.}";
+  fi
+}
+
 if [ -f ~/config/bashcolors ]; then
 	. ~/config/bashcolors
 fi
