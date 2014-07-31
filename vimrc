@@ -116,7 +116,26 @@ autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
 autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
 highlight EOLWS ctermbg=red guibg=red
 
-ab phpbacktrace $e = new Exception;<CR>var_dump($e->getTraceAsString());<CR>die()<CR>
+set list listchars=tab:»·
+
+nmap <F2> :set paste!<CR>
+nmap <F3> :set nu!<CR>:call ToggleListChars()<CR>
+
+fun! ToggleListChars()
+	if !exists("g:my_list_chars")
+		let g:my_list_chars = 2
+	endif
+
+	if g:my_list_chars == 1
+		let g:my_list_chars = 2
+		set list listchars=tab:»·
+	else
+		let g:my_list_chars = 1
+		set list listchars=tab:\ \ 
+	endif
+endfunction
+
 iabbrev <silent> <buffer> phpprintr echo "<pre>";<CR>print_r();<CR>echo "</pre>";<CR>die();<CR>
 iabbrev <silent> <buffer> phpvardump echo "<pre>";<CR>var_dump();<CR>echo "</pre>";<CR>die();<CR>
+ab phpbacktrace $e = new Exception;<CR>var_dump($e->getTraceAsString());<CR>die()<CR>
 

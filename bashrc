@@ -41,3 +41,5 @@ function apagabranch() {
 	git branch -D $1
 	echo git branch -D $1
 }
+
+alias tmux="TERM=xterm-256color tmux"
