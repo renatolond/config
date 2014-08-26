@@ -111,11 +111,6 @@ endfunction
 " END PRETTY TAB NUMBERS!
 " #######################
 
-" highlight EOL whitespace
-autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
-autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
-highlight EOLWS ctermbg=red guibg=red
-
 set list listchars=tab:»·
 
 nmap <F2> :set paste!<CR>
@@ -131,7 +126,7 @@ fun! ToggleListChars()
 		set list listchars=tab:»·
 	else
 		let g:my_list_chars = 1
-		set list listchars=tab:\ \ 
+		set list listchars=tab:\ \
 	endif
 endfunction
 
@@ -181,3 +176,10 @@ endif
 
 colorscheme gruvbox
 set background=dark
+
+" highlight EOL whitespace
+highlight ExtraWhitespace ctermbg=52 guibg=#5f0000 "rgb=95,0,0
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
