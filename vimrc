@@ -139,3 +139,45 @@ iabbrev <silent> <buffer> phpprintr echo "<pre>";<CR>print_r();<CR>echo "</pre>"
 iabbrev <silent> <buffer> phpvardump echo "<pre>";<CR>var_dump();<CR>echo "</pre>";<CR>die();<CR>
 ab phpbacktrace $e = new Exception;<CR>var_dump($e->getTraceAsString());<CR>die()<CR>
 
+"NeoBundle Scripts-----------------------------
+if has('vim_starting')
+  set nocompatible               " Be iMproved
+
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" Required:
+call neobundle#begin(expand('/home/rcerqueira/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" My Bundles here:
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'morhetz/gruvbox'
+NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'bling/vim-airline'
+
+" You can specify revision/branch/tag.
+NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+
+" Required:
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+"End NeoBundle Scripts-------------------------
+if $TERM == 'xterm-256color' || $TERM == 'screen-256color' || $COLORTERM == 'gnome-terminal'
+	set t_Co=256
+endif
+
+colorscheme gruvbox
+set background=dark
