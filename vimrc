@@ -38,8 +38,6 @@ set wildmode=longest,list,full
 set wildmenu
 set softtabstop=2
 
-au FileType c,cpp,objc,objcpp call rainbow#load()
-
 " #######################
 " # PRETTY TAB NUMBERS! #
 set tabline=%!MyTabLine()
@@ -154,7 +152,7 @@ NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'morhetz/gruvbox'
-NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'oblitum/rainbow'
 NeoBundle 'bling/vim-airline'
 
 " You can specify revision/branch/tag.
@@ -183,3 +181,5 @@ match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+
+au FileType c,cpp,objc,objcpp call rainbow#load()
