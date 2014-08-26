@@ -135,8 +135,8 @@ fun! ToggleListChars()
 	endif
 endfunction
 
-iabbrev <silent> <buffer> phpprintr echo "<pre>";<CR>print_r();<CR>echo "</pre>";<CR>die();<CR>
-iabbrev <silent> <buffer> phpvardump echo "<pre>";<CR>var_dump();<CR>echo "</pre>";<CR>die();<CR>
+iabbrev phpprintr echo "<pre>";<CR>print_r();<CR>echo "</pre>";<CR>die();<CR>
+iabbrev phpvardump echo "<pre>";<CR>var_dump();<CR>echo "</pre>";<CR>die();<CR>
 ab phpbacktrace $e = new Exception;<CR>var_dump($e->getTraceAsString());<CR>die()<CR>
 
 "NeoBundle Scripts-----------------------------
