@@ -178,7 +178,7 @@ colorscheme gruvbox
 set background=dark
 
 " highlight EOL whitespace
-highlight ExtraWhitespace ctermbg=52 guibg=#5f0000 "rgb=95,0,0
+highlight ExtraWhitespace ctermbg=9 guibg=#ff0000 "rgb=95,0,0
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
