@@ -124,7 +124,7 @@ fun! ToggleListChars()
 		set list listchars=tab:»·
 	else
 		let g:my_list_chars = 1
-		set list listchars=tab:\ \
+		set list listchars=tab:\ \ "whitespace here intentional
 	endif
 endfunction
 
