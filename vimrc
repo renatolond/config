@@ -154,6 +154,8 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'morhetz/gruvbox'
 NeoBundle 'oblitum/rainbow'
 NeoBundle 'bling/vim-airline'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'honza/vim-snippets'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -183,3 +185,15 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
 au FileType c,cpp,objc,objcpp call rainbow#load()
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" select when using the mouse
+set selectmode=mouse
+
+
+" Mouse scroll/select
+set mouse=a
+set ttymouse=xterm2
