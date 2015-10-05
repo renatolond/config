@@ -184,7 +184,7 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
-au FileType c,cpp,objc,objcpp call rainbow#load()
+au FileType c,cpp,objc,objcpp,java call rainbow#load()
 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
