@@ -7,4 +7,4 @@
 	co = checkout
 	sdiff = diff --cached
 [commit]
-	template = /home/rcerqueira/config/git_commit_msg.txt
+	template = ~/config/git_commit_msg.txt
