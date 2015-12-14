@@ -6,5 +6,6 @@
 	st = status
 	co = checkout
 	sdiff = diff --cached
+	slap = blame -w
 [commit]
 	template = ~/config/git_commit_msg.txt
