@@ -188,6 +188,7 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
 au FileType c,cpp,objc,objcpp,java call rainbow#load()
+au FileType ruby setlocal shiftwidth=2 tabstop=2
 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
