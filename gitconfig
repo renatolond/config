@@ -9,3 +9,6 @@
 	slap = blame -w
 [commit]
 	template = ~/config/git_commit_msg.txt
+[filter "tabspace"]
+	smudge = unexpand --tabs=2 --first-only
+	clean = expand --tabs=2 --initial
