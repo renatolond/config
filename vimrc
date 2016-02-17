@@ -1,11 +1,14 @@
 " syntax highlight
-syntax enable
+syntax on
 
 " 4 spaces for indenting
 set shiftwidth=4
 
-" 4 stops
+" 4 stops (visual tab)
 set tabstop=4
+
+" 2 stops each tab press
+set softtabstop=2
 
 " Spaces instead of tabs
 "set expandtab
@@ -13,10 +16,12 @@ set tabstop=4
 " Always set auto indenting on
 set autoindent smartindent cindent
 
+" highlight search, incremental search, ignore case smartly (if there's one
+" upper case, takes case in consideration in the search)
 set hlsearch incsearch ignorecase smartcase
 
+" Show ruler
 set ru
-syn on
 
 " not compatible with vi
 set nocp
@@ -28,15 +33,16 @@ set ww=<,>,b,s,[,]
 " Status bar
 set statusline=%1*%F%m%r%h%w%=%(%c%V\ %l/%L\ %P%)
 set laststatus=2
+
 " this enables "visual" wrapping
 set wrap
 
 " this turns off physical line wrapping (ie: automatic insertion of newlines)
 set textwidth=0 wrapmargin=0
 
+" changes the tab behaviour in :tabedit to be more similar to bash autocomplete
 set wildmode=longest,list,full
 set wildmenu
-set softtabstop=2
 
 " #######################
 " # PRETTY TAB NUMBERS! #
@@ -109,11 +115,13 @@ endfunction
 " END PRETTY TAB NUMBERS!
 " #######################
 
-set list listchars=tab:»·
-
+" F2 shortcut to toggle paste mode
 nmap <F2> :set paste!<CR>
-nmap <F3> :set nu!<CR>:call ToggleListChars()<CR>
 
+" Shows tabs as »··· by default
+" F3 shortcut to turn it off with line numbers to allow copy/paste
+nmap <F3> :set nu!<CR>:call ToggleListChars()<CR>
+set list listchars=tab:»·
 fun! ToggleListChars()
 	if !exists("g:my_list_chars")
 		let g:my_list_chars = 2
@@ -173,6 +181,8 @@ command Gslap Gblame -w
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
+
+" if terminal is 256-color, enable 256 color in vim
 if $TERM == 'xterm-256color' || $TERM == 'screen-256color' || $COLORTERM == 'gnome-terminal'
 	set t_Co=256
 endif
@@ -187,7 +197,10 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
+" enable rainbow parenthesis in c, cpp, objc, objcpp and java
 au FileType c,cpp,objc,objcpp,java call rainbow#load()
+
+" ruby shift and tabstop to 2
 au FileType ruby setlocal shiftwidth=2 tabstop=2
 
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -196,7 +209,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " select when using the mouse
 set selectmode=mouse
-
 
 " Mouse scroll/select
 set mouse=a
