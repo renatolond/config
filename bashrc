@@ -15,8 +15,10 @@ if [ -f ~/config/bashcolors ]; then
 	. ~/config/bashcolors
 fi
 
+encoding_test='ã' #if we see the character correctly, we are in an UTF-8 term
+
 # Define basic PS1 with coloring: [User ~/Folder]
-PS1="[$Green\u$Color_Off@$Cyan\h$Color_Off $Blue\w$Color_Off]"
+PS1="[$Red$encoding_test|$Color_Off$Green\u$Color_Off@$Cyan\h$Color_Off $Blue\w$Color_Off]"
 # Define git stuff, if is in a git folder, it shows the name of the branch.
 # And color it yellow when have no changes, and red if there is.
 PS1=$PS1'$(git branch &>/dev/null;\
