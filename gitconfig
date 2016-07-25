@@ -1,6 +1,8 @@
+[core]
+	excludesfile = ~/config/.global_gitignore
 [user]
 	name = Renato \"Lond\" Cerqueira
-	email = renato.lond@gmail.com
+	email = renato@lond.com.br
 [alias]
 	ci = commit
 	st = status
