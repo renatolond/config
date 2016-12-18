@@ -164,6 +164,7 @@ NeoBundle 'oblitum/rainbow'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
+NeoBundle 'mhinz/vim-startify'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -189,6 +190,30 @@ endif
 
 colorscheme gruvbox
 set background=dark
+
+" vim-startify begin
+
+" When opening a file or bookmark, seek and change to the root directory of the
+" VCS (if there is one).
+let g:startify_change_to_vcs_root = 1
+
+let g:startify_bookmarks = [
+	\ { 'src': '~/sources' },
+	\ { 'ivglib': '~/sources/internetgameslibrary' },
+	\ { 'cfg': '~/config' },
+	\]
+
+let g:startify_custom_header = [
+	\ ' :::         ...   :::.    :::.:::::::-.',
+	\ ' ;;;      .;;;;;;;.`;;;;,  `;;; ;;,   `'';,',
+	\ ' [[[     ,[[     \[[,[[[[[. ''[[ `[[     [[',
+	\ ' $$''     $$$,     $$$$$$ "Y$c$$  $$,    $$',
+	\ 'o88oo,.__"888,_ _,88P888    Y88  888_,o8P''',
+	\ '""""YUMMM  "YMMMMMP" MMM     YM  MMMMP"`',
+	\ ]
+
+
+" vim-startify end
 
 " highlight EOL whitespace
 highlight ExtraWhitespace ctermbg=9 guibg=#ff0000 "rgb=95,0,0
