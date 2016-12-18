@@ -14,3 +14,5 @@
 [filter "tabspace"]
 	smudge = unexpand --tabs=2 --first-only
 	clean = expand --tabs=2 --initial
+[merge]
+	tool = vimdiff
