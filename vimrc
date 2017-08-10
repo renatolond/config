@@ -1,3 +1,6 @@
+scriptencoding utf-8
+set encoding=utf-8
+
 " syntax highlight
 syntax on
 
@@ -118,10 +121,10 @@ endfunction
 " F2 shortcut to toggle paste mode
 nmap <F2> :set paste!<CR>
 
-" Shows tabs as 环贩 by default
+" Shows tabs as 禄路路路 by default
 " F3 shortcut to turn it off with line numbers to allow copy/paste
 nmap <F3> :set nu!<CR>:call ToggleListChars()<CR>
-set list listchars=tab:环
+set list listchars=tab:禄路
 fun! ToggleListChars()
 	if !exists("g:my_list_chars")
 		let g:my_list_chars = 2
@@ -129,7 +132,7 @@ fun! ToggleListChars()
 
 	if g:my_list_chars == 1
 		let g:my_list_chars = 2
-		set list listchars=tab:环
+		set list listchars=tab:禄路
 	else
 		let g:my_list_chars = 1
 		set list listchars=tab:\ \ "whitespace here intentional
@@ -165,9 +168,16 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'mhinz/vim-startify'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'xolox/vim-easytags'
+NeoBundle 'majutsushi/tagbar'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+
+let g:airline_powerline_fonts = 1
 
 " Required:
 call neobundle#end()
@@ -222,15 +232,21 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
+autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
+autocmd BufRead,BufNewFile *.scss.erb setlocal filetype=scss.eruby
+
 " enable rainbow parenthesis in c, cpp, objc, objcpp and java
 au FileType c,cpp,objc,objcpp,java call rainbow#load()
 
-" ruby shift and tabstop to 2
-au FileType ruby setlocal shiftwidth=2 tabstop=2
+" ruby,html,css shift and tabstop to 2
+au FileType ruby,html,css,scss,html.eruby,scss.eruby setlocal shiftwidth=2 tabstop=2 expandtab
 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+nnoremap <silent> <F8> :NERDTreeToggle<CR>
+nnoremap <silent> <F9> :TagbarToggle<CR>
 
 " select when using the mouse
 set selectmode=mouse
