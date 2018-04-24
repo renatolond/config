@@ -239,7 +239,7 @@ autocmd BufRead,BufNewFile *.scss.erb setlocal filetype=scss.eruby
 au FileType c,cpp,objc,objcpp,java call rainbow#load()
 
 " ruby,html,css shift and tabstop to 2
-au FileType ruby,html,css,scss,html.eruby,scss.eruby setlocal shiftwidth=2 tabstop=2 expandtab
+au FileType ruby,html,css,scss,html.eruby,scss.eruby,javascript,yml setlocal shiftwidth=2 tabstop=2 expandtab
 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -254,3 +254,4 @@ set selectmode=mouse
 " Mouse scroll/select
 set mouse=a
 set ttymouse=xterm2
+set tabpagemax=50

@@ -11,14 +11,18 @@ vimgitshow() {
   fi
 }
 
+ggexcept() {
+	git grep -i $1 -- ":(exclude)*/zxcvbn.js" ":(exclude)*/$2"
+}
+
 if [ -f ~/config/bashcolors ]; then
 	. ~/config/bashcolors
 fi
 
-encoding_test='ã' #if we see the character correctly, we are in an UTF-8 term
+encoding_test="🤔" #if we see the character correctly, we are in an UTF-8 term
 
 # Define basic PS1 with coloring: [User ~/Folder]
-PS1="[$Red$encoding_test|$Color_Off$Green\u$Color_Off@$Cyan\h$Color_Off $Blue\w$Color_Off]"
+PS1="[$encoding_test$Red|$Color_Off$Green\u$Color_Off@$Cyan\h$Color_Off $Blue\w$Color_Off]"
 # Define git stuff, if is in a git folder, it shows the name of the branch.
 # And color it yellow when have no changes, and red if there is.
 PS1=$PS1'$(git branch &>/dev/null;\
@@ -42,6 +46,10 @@ function apagabranch() {
 	git push origin :$1
 	git branch -D $1
 	echo git branch -D $1
+}
+
+function gem_install_puma() {
+	gem install puma -v $1 -- --with-cppflags=-I/usr/include/openssl-1.0/
 }
 
 alias tmux="TERM=xterm-256color tmux"
