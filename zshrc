@@ -73,7 +73,9 @@ function gem_install_puma() {
 
 encoding_test="🧟" #if we see the character correctly, we are in an UTF-8 term
 
-PROMPT='[%F{red}$encoding_test|%f%F{green}%n%f@%F{cyan}%m%f %F{blue}%3~%f] $(git_super_status)$ '
+source "$HOME/config/ruby.zsh"
+
+PROMPT='[%F{red}$encoding_test|%f%F{green}%n%f@%F{cyan}%m%f %F{blue}%3~%f]$(spaceship_ruby) $(git_super_status)$ '
 RPROMPT=''
 
 ZSH_THEME_GIT_PROMPT_PREFIX="("
