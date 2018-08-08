@@ -171,8 +171,9 @@ NeoBundle 'mhinz/vim-startify'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'xolox/vim-misc'
-NeoBundle 'xolox/vim-easytags'
+"NeoBundle 'xolox/vim-easytags'
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'rhysd/vim-crystal'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -239,7 +240,7 @@ autocmd BufRead,BufNewFile *.scss.erb setlocal filetype=scss.eruby
 au FileType c,cpp,objc,objcpp,java call rainbow#load()
 
 " ruby,html,css shift and tabstop to 2
-au FileType ruby,html,css,scss,html.eruby,scss.eruby,javascript,yml setlocal shiftwidth=2 tabstop=2 expandtab
+au FileType ruby,html,css,scss,html.eruby,scss.eruby,javascript,yml,crystal setlocal shiftwidth=2 tabstop=2 expandtab
 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
