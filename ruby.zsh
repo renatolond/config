@@ -52,7 +52,7 @@ SPACESHIP_PROMPT_DEFAULT_PREFIX=" "
 SPACESHIP_RUBY_SHOW="${SPACESHIP_RUBY_SHOW=true}"
 SPACESHIP_RUBY_PREFIX="${SPACESHIP_RUBY_PREFIX="$SPACESHIP_PROMPT_DEFAULT_PREFIX"}"
 SPACESHIP_RUBY_SUFFIX="${SPACESHIP_RUBY_SUFFIX="$SPACESHIP_PROMPT_DEFAULT_SUFFIX"}"
-SPACESHIP_RUBY_SYMBOL="${SPACESHIP_RUBY_SYMBOL="💎 "}"
+SPACESHIP_RUBY_SYMBOL="${SPACESHIP_RUBY_SYMBOL="💎"}"
 SPACESHIP_RUBY_COLOR="${SPACESHIP_RUBY_COLOR="red"}"
 
 # ------------------------------------------------------------------------------
@@ -82,6 +82,7 @@ spaceship_ruby() {
 
   [[ -z $ruby_version || "${ruby_version}" == "system" ]] && return
 
+  ruby_version="${ruby_version//#ruby-/}"
   # Add 'v' before ruby version that starts with a number
   [[ "${ruby_version}" =~ ^[0-9].+$ ]] && ruby_version="v${ruby_version}"
 
