@@ -174,6 +174,8 @@ NeoBundle 'xolox/vim-misc'
 "NeoBundle 'xolox/vim-easytags'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'rhysd/vim-crystal'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'tpope/vim-abolish'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -240,14 +242,17 @@ autocmd BufRead,BufNewFile *.scss.erb setlocal filetype=scss.eruby
 au FileType c,cpp,objc,objcpp,java call rainbow#load()
 
 " ruby,html,css shift and tabstop to 2
-au FileType ruby,html,css,scss,html.eruby,scss.eruby,javascript,yml,crystal setlocal shiftwidth=2 tabstop=2 expandtab
-
+au FileType ruby,html,css,scss,html.eruby,scss.eruby,javascript,yaml,crystal,coffee setlocal shiftwidth=2 tabstop=2 expandtab
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
 nnoremap <silent> <F9> :TagbarToggle<CR>
+
+"let g:easytags_async=1
+"let g:easytags_auto_highlight=0
+"let g:easytags_syntax_keyword = 'always'
 
 " select when using the mouse
 set selectmode=mouse
