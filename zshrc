@@ -75,7 +75,34 @@ encoding_test="🧟" #if we see the character correctly, we are in an UTF-8 term
 
 source "$HOME/config/ruby.zsh"
 
-PROMPT='[%F{red}$encoding_test|%f%F{green}%n%f@%F{cyan}%m%f %F{blue}%3~%f]$(spaceship_ruby) $(git_super_status)$ '
+DEFAULT_USER=renatolond
+CROSS="\u2718"
+LIGHTNING="\u26a1"
+GEAR="\u2699"
+
+prompt_context() {
+  local user=`whoami`
+
+  if [[ "$user" != "$DEFAULT_USER" ]]; then
+    print -n "%F{green}%n%f"
+  fi
+  if [[ "$user" != "$DEFAULT_USER" || -n "$SSH_CONNECTION" ]]; then
+    print -n "@%F{cyan}%m%f"
+  fi
+}
+
+prompt_status() {
+  RETVAL=$?
+  local symbols
+  symbols=()
+  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}$CROSS"
+  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}$LIGHTNING"
+  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}$GEAR"
+
+  [[ -n "$symbols" ]] && print -n "$symbols%F{red}|%f"
+}
+
+PROMPT='[%F{red}$encoding_test|%f$(prompt_status)$(prompt_context) %F{blue}%3~%f]$(spaceship_ruby) $(git_super_status)❯ '
 RPROMPT=''
 
 ZSH_THEME_GIT_PROMPT_PREFIX="("
@@ -85,7 +112,7 @@ ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[yellow]%}"
 ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}%{●%G%}"
 ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{✖%G%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{✚%G%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{↓%G%}"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{↑%G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{⇣%G%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{⇡%G%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{…%G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{✔%G%}"
