@@ -235,7 +235,7 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
-autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
+"autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
 autocmd BufRead,BufNewFile *.scss.erb setlocal filetype=scss.eruby
 
 " enable rainbow parenthesis in c, cpp, objc, objcpp and java
