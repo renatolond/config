@@ -84,10 +84,11 @@ prompt_context() {
   local user=`whoami`
 
   if [[ "$user" != "$DEFAULT_USER" ]]; then
-    print -n "%F{green}%n%f"
-  fi
-  if [[ "$user" != "$DEFAULT_USER" || -n "$SSH_CONNECTION" ]]; then
-    print -n "@%F{cyan}%m%f"
+    if [[ -n "$SSH_CONNECTION" ]]; then
+      print -n "%F{green}%n%f@%F{cyan}%m%f"
+    else
+      print -n "%F{green}%n%f"
+    fi
   fi
 }
 
