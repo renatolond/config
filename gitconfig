@@ -16,3 +16,11 @@
 	clean = expand --tabs=2 --initial
 [merge]
 	tool = vimdiff
+[diff]
+	tool = vimdiff
+[mergetool]
+	prompt = false
+[difftool]
+	prompt = false
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
