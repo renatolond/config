@@ -1,0 +1,14 @@
+extends ruby
+priority 0
+
+snippet frozen "# frozen_string_literal: true"
+# frozen_string_literal: true
+
+
+endsnippet
+
+snippet memo "memoized function"
+def ${1:FUNC_NAME}
+  @$1 ||= ${2:WRITE}
+end
+endsnippet
