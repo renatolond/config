@@ -27,7 +27,7 @@ compinit
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=10000
-SAVEHIST=1000
+SAVEHIST=$HISTSIZE
 setopt appendhistory autocd
 setopt share_history
 setopt HIST_EXPIRE_DUPS_FIRST
