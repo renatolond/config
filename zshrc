@@ -10,7 +10,8 @@ ZSH_THEME=""
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(nvm git-prompt)
+plugins=(nvm git-prompt zsh-autosuggestions)
+# Zsh-autosuggestions need to be installed from https://github.com/zsh-users/zsh-autosuggestions
 
 source $ZSH/oh-my-zsh.sh
 
