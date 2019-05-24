@@ -68,6 +68,8 @@ alias pega="git fetch origin; git pull --rebase origin \$(parse_git_branch)"
 alias manda="git push origin \$(parse_git_branch)"
 alias mandacomforca="git push origin --force-with-lease \$(parse_git_branch)"
 alias desfaztudo="git reset --hard origin/\$(parse_git_branch)"
+alias pegalogo="git stash -u && pega && git stash pop"
+alias stashgeral="git add . && git stash"
 function gem_install_puma() {
     gem install puma -v $1 -- --with-cppflags=-I/usr/include/openssl-1.0/
 }
