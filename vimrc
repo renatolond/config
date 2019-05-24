@@ -175,8 +175,6 @@ NeoBundle 'rhysd/vim-crystal'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'leafgarland/typescript-vim'
-
-" You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell'
 
 let g:airline_powerline_fonts = 1
@@ -264,3 +262,6 @@ else
     set ttymouse=xterm2
 end
 set tabpagemax=50
+
+" Extended matching of begin/end in languages
+packadd! matchit
