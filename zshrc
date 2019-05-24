@@ -73,6 +73,7 @@ alias stashgeral="git add . && git stash"
 function gem_install_puma() {
     gem install puma -v $1 -- --with-cppflags=-I/usr/include/openssl-1.0/
 }
+alias tempoembxl="curl 'https://wttr.in/brussels?format=4'"
 
 encoding_test="🧟" #if we see the character correctly, we are in an UTF-8 term
 
