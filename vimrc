@@ -176,6 +176,7 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'Shougo/vimshell'
+NeoBundle 'andrewradev/splitjoin.vim'
 
 let g:airline_powerline_fonts = 1
 
