@@ -9,6 +9,8 @@
 	co = checkout
 	sdiff = diff --cached
 	slap = blame -w
+	sw = switch
+	re = restore
 [commit]
 	template = ~/config/git_commit_msg.txt
 [filter "tabspace"]
