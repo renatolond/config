@@ -257,11 +257,15 @@ set selectmode=mouse
 
 " Mouse scroll/select
 set mouse=a
-if has("mouse_sgr")
-    set ttymouse=sgr
-else
-    set ttymouse=xterm2
+
+if !has("nvim")
+	if has("mouse_sgr")
+		set ttymouse=sgr
+	else
+		set ttymouse=xterm2
+	end
 end
+
 set tabpagemax=50
 
 " Extended matching of begin/end in languages
