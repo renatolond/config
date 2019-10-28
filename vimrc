@@ -177,6 +177,7 @@ NeoBundle 'tpope/vim-abolish'
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'andrewradev/splitjoin.vim'
+NeoBundle 'dense-analysis/ale'
 
 let g:airline_powerline_fonts = 1
 
@@ -247,6 +248,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/config/vimsnippets"]
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
 nnoremap <silent> <F9> :TagbarToggle<CR>
+
+" Ale linting
+let b:ale_fixers = {'ruby' : ['rubocop']}
 
 "let g:easytags_async=1
 "let g:easytags_auto_highlight=0
