@@ -26,3 +26,5 @@
 	prompt = false
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
+[rebase]
+	instructionFormat = (%an <%ae>) %s
