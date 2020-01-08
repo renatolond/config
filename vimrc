@@ -250,7 +250,8 @@ nnoremap <silent> <F8> :NERDTreeToggle<CR>
 nnoremap <silent> <F9> :TagbarToggle<CR>
 
 " Ale linting
-let b:ale_fixers = {'ruby' : ['rubocop']}
+let g:ale_ruby_rubocop_executable = 'bundle'
+let b:ale_linters = {'ruby' : ['rubocop']}
 
 "let g:easytags_async=1
 "let g:easytags_auto_highlight=0
