@@ -271,7 +271,7 @@ if !has("nvim")
 	end
 end
 
-set tabpagemax=50
+set tabpagemax=80
 
 " Extended matching of begin/end in languages
 packadd! matchit
