@@ -238,7 +238,7 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufRead,BufNewFile *.scss.erb setlocal filetype=scss.eruby
 
 " enable rainbow parenthesis in c, cpp, objc, objcpp and java
-au FileType c,cpp,objc,objcpp,java call rainbow#load()
+au FileType c,cpp,objc,objcpp,java,rust call rainbow#load()
 
 " ruby,html,css shift and tabstop to 2
 au FileType ruby,html,css,scss,html.eruby,scss.eruby,javascript,yaml,crystal,coffee,json,typescript setlocal shiftwidth=2 tabstop=2 expandtab
