@@ -170,6 +170,8 @@ NeoBundle 'tpope/vim-abolish'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'andrewradev/splitjoin.vim'
 NeoBundle 'dense-analysis/ale'
+NeoBundle 'lmeijvogel/vim-yaml-helper'
+NeoBundle 'elixir-editors/vim-elixir'
 
 let g:airline_powerline_fonts = 1
 
@@ -239,6 +241,8 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/config/vimsnippets"]
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
+
+" autocmd! CursorMoved *.yml YamlDisplayFullPath " Uses vim-yaml-helper
 
 " Ale linting
 let g:ale_ruby_rubocop_executable = 'bundle'
