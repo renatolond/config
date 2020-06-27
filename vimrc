@@ -139,10 +139,6 @@ fun! ToggleListChars()
 	endif
 endfunction
 
-iabbrev phpprintr echo "<pre>";<CR>print_r();<CR>echo "</pre>";<CR>die();<CR>
-iabbrev phpvardump echo "<pre>";<CR>var_dump();<CR>echo "</pre>";<CR>die();<CR>
-ab phpbacktrace $e = new Exception;<CR>var_dump($e->getTraceAsString());<CR>die()<CR>
-
 "NeoBundle Scripts-----------------------------
 if has('vim_starting')
   set nocompatible               " Be iMproved
@@ -168,13 +164,9 @@ NeoBundle 'honza/vim-snippets' " Add snippets for the engine
 NeoBundle 'mhinz/vim-startify'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'xolox/vim-misc'
-"NeoBundle 'xolox/vim-easytags'
-NeoBundle 'majutsushi/tagbar'
 NeoBundle 'rhysd/vim-crystal'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tpope/vim-abolish'
-NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'andrewradev/splitjoin.vim'
 NeoBundle 'dense-analysis/ale'
@@ -247,15 +239,10 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/config/vimsnippets"]
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
-nnoremap <silent> <F9> :TagbarToggle<CR>
 
 " Ale linting
 let g:ale_ruby_rubocop_executable = 'bundle'
 let b:ale_linters = {'ruby' : ['rubocop']}
-
-"let g:easytags_async=1
-"let g:easytags_auto_highlight=0
-"let g:easytags_syntax_keyword = 'always'
 
 " select when using the mouse
 set selectmode=mouse
