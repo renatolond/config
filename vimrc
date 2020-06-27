@@ -246,7 +246,8 @@ nnoremap <silent> <F8> :NERDTreeToggle<CR>
 
 " Ale linting
 let g:ale_ruby_rubocop_executable = 'bundle'
-let b:ale_linters = {'ruby' : ['rubocop']}
+let b:ale_linters = {'ruby' : ['rubocop'], 'python': ['pylint']}
+let g:ale_virtualenv_dir_names = ['.env', '.venv', '.virtualenv', 'env', 've-py3', 've', 'virtualenv', 'venv']
 
 " select when using the mouse
 set selectmode=mouse
