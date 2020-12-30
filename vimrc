@@ -237,9 +237,6 @@ au FileType c,cpp,objc,objcpp,java,rust call rainbow#load()
 
 " ruby,html,css shift and tabstop to 2
 au FileType ruby,html,css,scss,html.eruby,scss.eruby,javascript,yaml,crystal,coffee,json,typescript setlocal shiftwidth=2 tabstop=2 expandtab
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/config/vimsnippets"]
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
 
@@ -312,4 +309,19 @@ if exists('*complete_info')
 else
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
+
+nmap <silent> gd <Plug>(coc-definition)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Install extensions: coc-solargraph, coc-ultisnips, coc-python, coc-yaml
 " end of coc.nvim config
