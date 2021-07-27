@@ -169,10 +169,15 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'andrewradev/splitjoin.vim'
-NeoBundle 'dense-analysis/ale'
+"NeoBundle 'dense-analysis/ale'
 NeoBundle 'lmeijvogel/vim-yaml-helper'
 NeoBundle 'elixir-editors/vim-elixir'
-NeoBundle 'neoclide/coc.nvim', 'release', { 'build': { 'others': 'git checkout release' } }
+" NeoBundle 'neoclide/coc.nvim', 'release', { 'build': { 'others': 'git checkout release' } }
+NeoBundle 'neovim/nvim-lspconfig'
+NeoBundle 'hrsh7th/nvim-compe'
+NeoBundle 'ray-x/lsp_signature.nvim'
+NeoBundle 'windwp/nvim-autopairs'
+NeoBundle 'will133/vim-dirdiff'
 
 let g:airline_powerline_fonts = 1
 
@@ -242,10 +247,10 @@ nnoremap <silent> <F8> :NERDTreeToggle<CR>
 
 " autocmd! CursorMoved *.yml YamlDisplayFullPath " Uses vim-yaml-helper
 
-" Ale linting
-let g:ale_ruby_rubocop_executable = 'bundle'
-let b:ale_linters = {'ruby' : ['rubocop'], 'python': ['pylint']}
-let g:ale_virtualenv_dir_names = ['.env', '.venv', '.virtualenv', 'env', 've-py3', 've', 'virtualenv', 'venv']
+"" Ale linting
+"let g:ale_ruby_rubocop_executable = 'bundle'
+"let b:ale_linters = {'ruby' : ['rubocop'], 'python': ['pylint']}
+"let g:ale_virtualenv_dir_names = ['.env', '.venv', '.virtualenv', 'env', 've-py3', 've', 'virtualenv', 'venv']
 
 " select when using the mouse
 set selectmode=mouse
@@ -259,6 +264,12 @@ if !has("nvim")
 	else
 		set ttymouse=xterm2
 	end
+else
+  augroup nvimrc_aucmd
+    autocmd!
+    " https://github.com/neovim/neovim/issues/3463#issuecomment-148757691
+    autocmd CursorHold,FocusGained,FocusLost * rshada|wshada
+  augroup END
 end
 
 set tabpagemax=80
@@ -267,61 +278,181 @@ set tabpagemax=80
 packadd! matchit
 
 " coc.nvim extra config
-let g:coc_global_extensions = ['coc-solargraph']
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+"let g:coc_global_extensions = ['coc-solargraph']
+"" Don't pass messages to |ins-completion-menu|.
+"set shortmess+=c
+"
+"" Always show the signcolumn, otherwise it would shift the text each time
+"" diagnostics appear/become resolved.
+"if has("patch-8.1.1564")
+"  " Recently vim can merge signcolumn and number column into one
+"  set signcolumn=number
+"else
+"  set signcolumn=yes
+"endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-
-nmap <silent> gd <Plug>(coc-definition)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+"inoremap <silent><expr> <TAB>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<TAB>" :
+"      \ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+"function! s:check_back_space() abort
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+"
+"" Use <c-space> to trigger completion.
+"inoremap <silent><expr> <c-space> coc#refresh()
+"
+"" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+"" delays and poor user experience.
+"set updatetime=300
+"
+"" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+"" position. Coc only does snippet and additional edit on confirm.
+"" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+"if exists('*complete_info')
+"  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+"else
+"  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"endif
+"
+"nmap <silent> gd <Plug>(coc-definition)
+"
+"" Use K to show documentation in preview window.
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
+"
+"function! s:show_documentation()
+"  if (index(['vim','help'], &filetype) >= 0)
+"    execute 'h '.expand('<cword>')
+"  else
+"    call CocAction('doHover')
+"  endif
+"endfunction
 
 " Install extensions: coc-solargraph, coc-ultisnips, coc-python, coc-yaml
 " end of coc.nvim config
+
+lua << EOLUA
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+  require "lsp_signature".on_attach()
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { "solargraph" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+	on_attach = on_attach,
+	flags = {
+	  debounce_text_changes = 150,
+	}
+  }
+end
+EOLUA
+
+lua << EOLUA
+-- Compe setup
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = true;
+
+  source = {
+    path = true;
+    nvim_lsp = true;
+  };
+}
+
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local check_back_space = function()
+    local col = vim.fn.col('.') - 1
+    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+        return true
+    else
+        return false
+    end
+end
+
+-- Use (s-)tab to:
+--- move to prev/next item in completion menuone
+--- jump to prev/next snippet's placeholder
+_G.tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-n>"
+  elseif check_back_space() then
+    return t "<Tab>"
+  else
+    return vim.fn['compe#complete']()
+  end
+end
+_G.s_tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-p>"
+  else
+    return t "<S-Tab>"
+  end
+end
+
+vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+EOLUA
+set completeopt=menuone,noselect
+
+lua << EOLUA
+require('nvim-autopairs').setup()
+require("nvim-autopairs.completion.compe").setup({
+  map_cr = true, --  map <CR> on insert mode
+  map_complete = true -- it will auto insert `(` after select function or method item
+})
+EOLUA
