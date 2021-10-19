@@ -109,7 +109,7 @@ prompt_status() {
 }
 
 PROMPT='[%F{red}$encoding_test|%f$(prompt_status)$(prompt_context) %F{blue}%3~%f]$(spaceship_ruby) $(git_super_status)%F{magenta}❯%f '
-RPROMPT=''
+RPROMPT="%{$fg[yellow]%}[%*]"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="("
 ZSH_THEME_GIT_PROMPT_SUFFIX=")"
