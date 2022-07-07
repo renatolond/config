@@ -52,6 +52,7 @@ function fish_prompt
 	set -lx __fish_git_prompt_color_stagedstate red
 	set -lx __fish_git_prompt_color_invalidstate red
 	set -lx __fish_git_prompt_color_upstream brwhite
+	set -lx __fish_git_prompt_color_cleanstate green
 	set -lx __fish_git_prompt_show_informative_status
 	set -lx __fish_git_prompt_showstashstate
 	set -lx __fish_git_prompt_char_upstream_ahead ⇡
