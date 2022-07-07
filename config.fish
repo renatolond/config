@@ -24,9 +24,6 @@ function prompt_status
 
 	if test -n "$my_symbols"
 		echo -en "$my_symbols"(set_color red)"|"(set_color normal)
-	else
-		# If I don't print something it seems to hang, not sure why
-		echo -n (set_color normal)
 	end
 end
 
@@ -40,8 +37,8 @@ function prompt_context
 		echo -en (set_color green)"$user\e[49m"
 		if test -n "$SSH_CONNECTION"
 			echo -en "@"(set_color cyan)"$hostname\e[49m"
-end
-  end
+		end
+	end
 end
 
 function fish_prompt
