@@ -173,6 +173,7 @@ NeoBundle 'andrewradev/splitjoin.vim'
 NeoBundle 'lmeijvogel/vim-yaml-helper'
 NeoBundle 'elixir-editors/vim-elixir'
 " NeoBundle 'neoclide/coc.nvim', 'release', { 'build': { 'others': 'git checkout release' } }
+NeoBundle 'williamboman/nvim-lsp-installer'
 NeoBundle 'neovim/nvim-lspconfig'
 NeoBundle 'hrsh7th/nvim-compe'
 NeoBundle 'ray-x/lsp_signature.nvim'
@@ -242,7 +243,7 @@ autocmd BufRead,BufNewFile *.scss.erb setlocal filetype=scss.eruby
 au FileType c,cpp,objc,objcpp,java,rust call rainbow#load()
 
 " ruby,html,css shift and tabstop to 2
-au FileType ruby,html,css,scss,html.eruby,scss.eruby,javascript,yaml,crystal,coffee,json,typescript setlocal shiftwidth=2 tabstop=2 expandtab
+au FileType ruby,html,css,scss,html.eruby,scss.eruby,javascript,yaml,crystal,coffee,json,typescript,markdown setlocal shiftwidth=2 tabstop=2 expandtab
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/config/vimsnippets"]
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
 
@@ -340,7 +341,13 @@ packadd! matchit
 
 lua << EOLUA
 local nvim_lsp = require('lspconfig')
-
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -366,18 +373,25 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
   require "lsp_signature".on_attach()
 end
 
+require("nvim-lsp-installer").setup {}
+-- local lsp_installer = require("nvim-lsp-installer")
+-- 
+-- lsp_installer.on_server_ready(function (server)
+--     local opts = {}
+--     if (server.name == "grammarly") then
+-- 		opts.filetypes = { "markdown", "rst", "html" } -- add the filetypes you want grammarly to start on here
+--     end
+--     server:setup(opts)
+-- end)
+
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "solargraph" }
+local servers = { "solargraph", "grammarly" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
 	on_attach = on_attach,
