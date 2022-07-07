@@ -178,6 +178,7 @@ NeoBundle 'hrsh7th/nvim-compe'
 NeoBundle 'ray-x/lsp_signature.nvim'
 NeoBundle 'windwp/nvim-autopairs'
 NeoBundle 'will133/vim-dirdiff'
+NeoBundle 'dag/vim-fish'
 
 let g:airline_powerline_fonts = 1
 
