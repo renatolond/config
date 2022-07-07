@@ -61,7 +61,7 @@ function spaceship_ruby -d "Show current version of Ruby"
 	# Show versions only for Ruby-specific folders
 	if not test -f Gemfile \
 		-o -f Rakefile \
-		-o -f .ruby_version
+		-o -f .ruby_version \
 		-o (count *.rb) -gt 0
 		return
 	end

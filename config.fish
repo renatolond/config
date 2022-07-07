@@ -61,7 +61,10 @@ function fish_prompt
 	echo -n "["(set_color red)"$encoding_test|"(set_color normal)
 	prompt_status
 	prompt_context
-	echo -n " "(set_color blue)(prompt_pwd)(set_color normal)"]"(spaceship_ruby)(fish_git_prompt)(set_color magenta)"❯ "(set_color normal)
+	echo -n " "(set_color blue)(prompt_pwd)(set_color normal)"]"
+	spaceship_ruby
+	fish_git_prompt
+	echo -n (set_color magenta)"❯ "(set_color normal)
 end
 function fish_right_prompt
 	echo -n (set_color yellow)"["(date '+%H:%M:%S')"]"(set_color normal)
