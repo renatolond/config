@@ -48,11 +48,13 @@ function fish_prompt
 	set -lx __fish_git_prompt_color yellow
 	set -lx __fish_git_prompt_color_stashstate --bold brblue
 	set -lx __fish_git_prompt_color_dirtystate blue
-	set -lx __fish_git_prompt_show_informative_status
 	set -lx __fish_git_prompt_color_untrackedfiles brwhite
 	set -lx __fish_git_prompt_color_stagedstate red
 	set -lx __fish_git_prompt_color_invalidstate red
+	set -lx __fish_git_prompt_color_upstream brwhite
+	set -lx __fish_git_prompt_show_informative_status
 	set -lx __fish_git_prompt_showstashstate
+	set -lx __fish_git_prompt_char_upstream_ahead ⇡
 	set -l encoding_test "🧟" #if we see the character correctly, we are in an UTF-8 term
 
 	echo -n "["(set_color red)"$encoding_test|"(set_color normal)
