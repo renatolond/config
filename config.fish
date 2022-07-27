@@ -83,4 +83,9 @@ alias pegalogo="git stash -u && pega && git stash pop"
 alias stashgeral="git add . && git stash"
 alias tempoembxl="curl 'https://wttr.in/brussels?format=4'"
 
-rvm default
+
+if test -f .ruby-version
+	rvm use
+else
+	rvm default
+end
