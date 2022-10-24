@@ -282,6 +282,8 @@ local on_attach = function(client, bufnr)
   --Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+  --Set formatexpr to lua
+  vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr')
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
@@ -302,7 +304,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<space>F", function()
     vim.lsp.buf.format { async = true }
   end, bufopts)
-  vim.api.nvim_buf_set_option(0, 'formatexpr', 'v:lua.vim.lsp.formatexpr')
 
   require "lsp_signature".on_attach()
 end
