@@ -139,6 +139,17 @@ fun! ToggleListChars()
 	endif
 endfunction
 
+function! s:LuaFileRelative(script)
+  let l:callstack = expand("<stack>")
+  let l:list = split(l:callstack, '\.\.')
+  " list[-1] is SourceLocal function itself
+  " list[-2] is the calling script
+  let l:script_name = matchstr(l:list[-2], '^\(script \)\=\zs.\+\ze\[\d\+\]$')
+  let l:script_path = fnamemodify(l:script_name, ":p:h")
+  " l:script_path is the path where the script calling this function resides
+  execute printf("luafile %s/%s", l:script_path, a:script)
+endfunction
+
 "NeoBundle Scripts-----------------------------
 if has('vim_starting')
   set nocompatible               " Be iMproved
@@ -170,11 +181,17 @@ NeoBundle 'andrewradev/splitjoin.vim'
 NeoBundle 'lmeijvogel/vim-yaml-helper'
 NeoBundle 'williamboman/nvim-lsp-installer'
 NeoBundle 'neovim/nvim-lspconfig'
-NeoBundle 'hrsh7th/nvim-compe'
 NeoBundle 'ray-x/lsp_signature.nvim'
 NeoBundle 'windwp/nvim-autopairs'
 NeoBundle 'will133/vim-dirdiff'
 NeoBundle 'dag/vim-fish'
+
+" cmp-related plugins, used for displaying the completion floating window
+NeoBundle 'hrsh7th/nvim-cmp'
+NeoBundle 'hrsh7th/cmp-nvim-lsp'
+NeoBundle 'hrsh7th/cmp-buffer'
+NeoBundle 'hrsh7th/cmp-path'
+NeoBundle 'quangnguyen30192/cmp-nvim-ultisnips'
 
 let g:airline_powerline_fonts = 1
 
@@ -267,140 +284,7 @@ set tabpagemax=80
 " Extended matching of begin/end in languages
 packadd! matchit
 
-lua << EOLUA
-local nvim_lsp = require('lspconfig')
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  --Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+call s:LuaFileRelative("neovim/lsp.lua")
+call s:LuaFileRelative("neovim/cmp.lua")
 
-  --Set formatexpr to lua
-  vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr')
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set("n", "<space>F", function()
-    vim.lsp.buf.format { async = true }
-  end, bufopts)
-
-  require "lsp_signature".on_attach()
-end
-
--- local lsp_installer = require("nvim-lsp-installer")
--- 
--- lsp_installer.on_server_ready(function (server)
---     local opts = {}
---     if (server.name == "grammarly") then
--- 		opts.filetypes = { "markdown", "rst", "html" } -- add the filetypes you want grammarly to start on here
---     end
---     server:setup(opts)
--- end)
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { "solargraph", "grammarly", "rubocop", "crystalline" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-	on_attach = on_attach,
-	flags = {
-	  debounce_text_changes = 150,
-	}
-  }
-end
-
-require("nvim-lsp-installer").setup({
-    automatic_installation = true
-})
-EOLUA
-
-lua << EOLUA
--- Compe setup
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = true;
-
-  source = {
-    path = true;
-    nvim_lsp = true;
-  };
-}
-
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
-end
-
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
-  end
-end
-_G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  else
-    return t "<S-Tab>"
-  end
-end
-
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-EOLUA
-set completeopt=menuone,noselect
-
-lua << EOLUA
-require('nvim-autopairs').setup()
-require("nvim-autopairs.completion.compe").setup({
-  map_cr = true, --  map <CR> on insert mode
-  map_complete = true -- it will auto insert `(` after select function or method item
-})
-EOLUA
+set completeopt=menu,menuone,noselect
