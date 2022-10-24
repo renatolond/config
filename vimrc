@@ -299,12 +299,10 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set("n", "<space>F", "<cmd>lua vim.lsp.buf.formatting()<CR>", bufopts)
-  if client.resolved_capabilities.document_range_formatting then
-    vim.keymap.set("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", bufopts)
-  else
-    vim.keymap.set('n', '<space>f', "<cmd>lua print('Range format not supported')<CR>", bufopts)
-  end
+  vim.keymap.set("n", "<space>F", function()
+    vim.lsp.buf.format { async = true }
+  end, bufopts)
+  vim.api.nvim_buf_set_option(0, 'formatexpr', 'v:lua.vim.lsp.formatexpr')
 
   require "lsp_signature".on_attach()
 end
