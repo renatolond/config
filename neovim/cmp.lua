@@ -103,15 +103,6 @@ sources = cmp.config.sources({
 -- })
 -- })
 
--- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local servers = { "solargraph", "grammarly", "rubocop", "crystalline" }
-for _, lsp in ipairs(servers) do
-require('lspconfig')[lsp].setup {
-  capabilities = capabilities
-}
-end
-
 cmp.event:on(
 'confirm_done',
 cmp_autopairs.on_confirm_done()

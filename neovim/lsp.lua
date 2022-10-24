@@ -48,15 +48,19 @@ end
 --     server:setup(opts)
 -- end)
 
+-- requires cmp_nvim_lsp
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { "solargraph", "grammarly", "rubocop", "crystalline" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
-	on_attach = on_attach,
-	flags = {
-	  debounce_text_changes = 150,
-	}
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    capabilities = capabilities
   }
 end
 
