@@ -43,6 +43,11 @@ end
 
 function fish_prompt
 	set -lx fish_prompt_pwd_dir_length 0
+	set -lx __fish_git_prompt_show_informative_status 1
+	set -lx __fish_git_prompt_showuntrackedfiles 1
+	set -lx __fish_git_prompt_showdirtystate 1
+	set -lx __fish_git_prompt_showstashstate 1
+	set -lx __fish_git_prompt_showupstream auto
 	set -lx __fish_git_prompt_color_prefix normal
 	set -lx __fish_git_prompt_color_suffix normal
 	set -lx __fish_git_prompt_color yellow
@@ -53,8 +58,6 @@ function fish_prompt
 	set -lx __fish_git_prompt_color_invalidstate red
 	set -lx __fish_git_prompt_color_upstream brwhite
 	set -lx __fish_git_prompt_color_cleanstate green
-	set -lx __fish_git_prompt_show_informative_status
-	set -lx __fish_git_prompt_showstashstate
 	set -lx __fish_git_prompt_char_upstream_ahead ⇡
 	set -l encoding_test "🧟" #if we see the character correctly, we are in an UTF-8 term
 
