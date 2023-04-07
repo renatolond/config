@@ -1,3 +1,6 @@
+require("mason").setup()
+require("mason-lspconfig").setup()
+
 local nvim_lsp = require('lspconfig')
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -53,7 +56,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "solargraph", "grammarly", "rubocop", "crystalline" }
+local servers = { "solargraph", "grammarly" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -63,7 +66,3 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities
   }
 end
-
-require("nvim-lsp-installer").setup({
-    automatic_installation = true
-})

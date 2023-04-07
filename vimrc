@@ -179,7 +179,8 @@ NeoBundle 'tpope/vim-abolish'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'andrewradev/splitjoin.vim'
 NeoBundle 'lmeijvogel/vim-yaml-helper'
-NeoBundle 'williamboman/nvim-lsp-installer'
+NeoBundle 'williamboman/mason.nvim', { 'build': ':MasonUpdate'}
+NeoBundle 'williamboman/mason-lspconfig.nvim'
 NeoBundle 'neovim/nvim-lspconfig'
 NeoBundle 'ray-x/lsp_signature.nvim'
 NeoBundle 'windwp/nvim-autopairs'
@@ -192,6 +193,13 @@ NeoBundle 'hrsh7th/cmp-nvim-lsp'
 NeoBundle 'hrsh7th/cmp-buffer'
 NeoBundle 'hrsh7th/cmp-path'
 NeoBundle 'quangnguyen30192/cmp-nvim-ultisnips'
+
+" refactoring-related plugins
+NeoBundle 'nvim-lua/plenary.nvim'
+NeoBundle 'nvim-treesitter/nvim-treesitter'
+NeoBundle 'ThePrimeagen/refactoring.nvim'
+
+let mapleader="\\"
 
 let g:airline_powerline_fonts = 1
 
@@ -286,5 +294,6 @@ packadd! matchit
 
 call s:LuaFileRelative("neovim/lsp.lua")
 call s:LuaFileRelative("neovim/cmp.lua")
+call s:LuaFileRelative("neovim/refactoring.lua")
 
 set completeopt=menu,menuone,noselect
