@@ -286,6 +286,7 @@ set tabpagemax=80
 " Extended matching of begin/end in languages
 packadd! matchit
 
+call s:LuaFileRelative("neovim/treesitter.lua")
 call s:LuaFileRelative("neovim/lsp.lua")
 call s:LuaFileRelative("neovim/cmp.lua")
 call s:LuaFileRelative("neovim/refactoring.lua")
