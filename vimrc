@@ -150,72 +150,66 @@ function! s:LuaFileRelative(script)
   execute printf("luafile %s/%s", l:script_path, a:script)
 endfunction
 
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  set nocompatible               " Be iMproved
-
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+" vim-plug related install
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle'))
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" My Bundles here:
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'morhetz/gruvbox'
-NeoBundle 'oblitum/rainbow'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'SirVer/ultisnips' " Add snippets engine
-NeoBundle 'honza/vim-snippets' " Add snippets for the engine
-NeoBundle 'mhinz/vim-startify'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'rhysd/vim-crystal'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'andrewradev/splitjoin.vim'
-NeoBundle 'lmeijvogel/vim-yaml-helper'
-NeoBundle 'williamboman/mason.nvim', { 'build': ':MasonUpdate'}
-NeoBundle 'williamboman/mason-lspconfig.nvim'
-NeoBundle 'neovim/nvim-lspconfig'
-NeoBundle 'ray-x/lsp_signature.nvim'
-NeoBundle 'windwp/nvim-autopairs'
-NeoBundle 'will133/vim-dirdiff'
-NeoBundle 'dag/vim-fish'
+call plug#begin()
+Plug 'tpope/vim-fugitive'
+Plug 'bling/vim-airline'
+Plug 'SirVer/ultisnips' " Add snippets engine
+Plug 'honza/vim-snippets' " Add snippets for the engine
+Plug 'mhinz/vim-startify'
+Plug 'scrooloose/nerdtree'
+Plug 'rhysd/vim-crystal'
+Plug 'tpope/vim-abolish'
+Plug 'Shougo/vimshell'
+Plug 'andrewradev/splitjoin.vim'
+Plug 'lmeijvogel/vim-yaml-helper'
+Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate'}
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'windwp/nvim-autopairs'
+Plug 'will133/vim-dirdiff'
+Plug 'dag/vim-fish'
 
 " cmp-related plugins, used for displaying the completion floating window
-NeoBundle 'hrsh7th/nvim-cmp'
-NeoBundle 'hrsh7th/cmp-nvim-lsp'
-NeoBundle 'hrsh7th/cmp-buffer'
-NeoBundle 'hrsh7th/cmp-path'
-NeoBundle 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+
+" Treesiter related, for syntax
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'ellisonleao/gruvbox.nvim'
 
 " refactoring-related plugins
-NeoBundle 'nvim-lua/plenary.nvim'
-NeoBundle 'nvim-treesitter/nvim-treesitter'
-NeoBundle 'ThePrimeagen/refactoring.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'ThePrimeagen/refactoring.nvim'
+
+" Initialize plugin system
+" - Automatically executes `filetype plugin indent on` and `syntax enable`.
+call plug#end()
 
 let mapleader="\\"
 
 let g:airline_powerline_fonts = 1
 
 " Required:
-call neobundle#end()
-
-" Required:
 filetype plugin indent on
 
 " Requires vim-fugitive to work:
 command Gslap Gblame -w
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
 
 " if terminal is 256-color, enable 256 color in vim
 if $TERM == 'xterm-256color' || $TERM == 'screen-256color' || $COLORTERM == 'gnome-terminal'
