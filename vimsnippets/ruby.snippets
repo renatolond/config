@@ -1,34 +1,24 @@
-extends ruby
-priority 0
-
 snippet frozen "# frozen_string_literal: true"
-# frozen_string_literal: true
-
-
-endsnippet
+	# frozen_string_literal: true
+	
+	
 
 snippet memo "memoized function"
-def ${1:FUNC_NAME}
-  @$1 ||= ${2:WRITE}
-end
-endsnippet
+	def ${1:FUNC_NAME}
+	  @$1 ||= ${2:WRITE}
+	end
 
 snippet jard "jard debug"
-require "ruby_jard"; jard
-endsnippet
+	require "ruby_jard"; jard
 
 snippet @param
-@param [${1:Type}] ${2:Name} ${3:Description}
-endsnippet
+	@param [${1:Type}] ${2:Name} ${3:Description}
 
 snippet @return
-@return [${1:Type}] ${2:Description}
-endsnippet
+	@return [${1:Type}] ${2:Description}
 
 snippet @raise
-@raise [${1:Type}] ${2:Description}
-endsnippet
+	@raise [${1:Type}] ${2:Description}
 
 snippet debug "ruby 3.0 debugger"
-require "debug"; debugger
-endsnippet
+	require "debug"; debugger

@@ -165,7 +165,8 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin()
 Plug 'tpope/vim-fugitive'
 Plug 'bling/vim-airline'
-Plug 'SirVer/ultisnips' " Add snippets engine
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v1.*'}
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'honza/vim-snippets' " Add snippets for the engine
 Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdtree'
@@ -187,7 +188,6 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 " Treesiter related, for syntax
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -258,7 +258,6 @@ au FileType c,cpp,objc,objcpp,java,rust call rainbow#load()
 
 " ruby,html,css shift and tabstop to 2
 au FileType ruby,html,css,scss,html.eruby,scss.eruby,javascript,yaml,crystal,coffee,json,typescript,markdown setlocal shiftwidth=2 tabstop=2 expandtab
-let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/config/vimsnippets"]
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
 
 " select when using the mouse
@@ -289,6 +288,7 @@ packadd! matchit
 call s:LuaFileRelative("neovim/treesitter.lua")
 call s:LuaFileRelative("neovim/lsp.lua")
 call s:LuaFileRelative("neovim/cmp.lua")
+call s:LuaFileRelative("neovim/luasnip.lua")
 call s:LuaFileRelative("neovim/refactoring.lua")
 
 set completeopt=menu,menuone,noselect

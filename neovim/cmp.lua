@@ -37,7 +37,7 @@ local kind_icons = {
 cmp.setup({
 snippet = {
   expand = function(args)
-	vim.fn["UltiSnips#Anon"](args.body)
+    require('luasnip').lsp_expand(args.body)
   end,
 },
 formatting = {
@@ -49,7 +49,7 @@ formatting = {
       spell = "[Spellings]",
       zsh = "[Zsh]",
       buffer = "[Buffer]",
-      ultisnips = "[Snip]",
+      luasnip = "[Snip]",
       treesitter = "[Treesitter]",
       calc = "[Calculator]",
       nvim_lua = "[Lua]",
@@ -69,7 +69,7 @@ mapping = cmp.mapping.preset.insert({
 }),
 sources = cmp.config.sources({
   { name = 'nvim_lsp' },
-  { name = 'ultisnips' },
+  { name = 'luasnip' },
 }, {
   { name = 'buffer' },
   { name = 'path' }
