@@ -191,6 +191,7 @@ Plug 'hrsh7th/cmp-path'
 
 " Treesiter related, for syntax
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/playground'
 Plug 'ellisonleao/gruvbox.nvim'
 
 " refactoring-related plugins
@@ -257,7 +258,7 @@ autocmd BufRead,BufNewFile *.scss.erb setlocal filetype=scss.eruby
 au FileType c,cpp,objc,objcpp,java,rust call rainbow#load()
 
 " ruby,html,css shift and tabstop to 2
-au FileType ruby,html,css,scss,html.eruby,scss.eruby,javascript,yaml,crystal,coffee,json,typescript,markdown setlocal shiftwidth=2 tabstop=2 expandtab
+au FileType ruby,html,css,scss,html.eruby,scss.eruby,javascript,yaml,crystal,coffee,json,typescript,markdown,gotmpl,terraform setlocal shiftwidth=2 tabstop=2 expandtab
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
 
 " select when using the mouse
@@ -292,3 +293,5 @@ call s:LuaFileRelative("neovim/luasnip.lua")
 call s:LuaFileRelative("neovim/refactoring.lua")
 
 set completeopt=menu,menuone,noselect
+
+autocmd BufNewFile,BufRead *.yaml,*.yml,*.tpl if search('{{.\+}}', 'nw') | setlocal filetype=gotmpl | endif
