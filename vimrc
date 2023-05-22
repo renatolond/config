@@ -193,6 +193,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/playground'
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'andymass/vim-matchup'
 
 " refactoring-related plugins
 Plug 'nvim-lua/plenary.nvim'
@@ -284,7 +285,7 @@ end
 set tabpagemax=80
 
 " Extended matching of begin/end in languages
-packadd! matchit
+" packadd! matchit
 
 call s:LuaFileRelative("neovim/treesitter.lua")
 call s:LuaFileRelative("neovim/lsp.lua")
