@@ -12,13 +12,16 @@ snippet jard "jard debug"
 	require "ruby_jard"; jard
 
 snippet @param
-	@param [${1:Type}] ${2:Name} ${3:Description}
+	@param ${1:Name} [${2:Type}] ${3:Description}
 
 snippet @return
 	@return [${1:Type}] ${2:Description}
 
 snippet @raise
 	@raise [${1:Type}] ${2:Description}
+
+snippet @options
+	@option ${1:OptName} [${2:Type}] :${3:KeyName} ${4:Description}
 
 snippet debug "ruby 3.0 debugger"
 	require "debug"; debugger
