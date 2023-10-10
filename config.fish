@@ -4,12 +4,13 @@ end
 set DEFAULT_USER renatolond
 
 function prompt_status
+	set -l _display_status $argv[1]
 	set -l CROSS (printf "\u2718")
 	set -l LIGHTNING (printf "\u26a1")
 	set -l GEAR (printf "\u2699")
 	set -l my_symbols ""
 	# Was last command successful?
-	if test $status -ne 0
+	if test $_display_status -ne 0
 		set my_symbols "$my_symbols"(set_color red)"$CROSS"
 	end
 	set -l user_id $(id -u)
@@ -42,6 +43,7 @@ function prompt_context
 end
 
 function fish_prompt
+	set -l _display_status $status
 	set -lx fish_prompt_pwd_dir_length 0
 	set -lx __fish_git_prompt_show_informative_status 1
 	set -lx __fish_git_prompt_showuntrackedfiles 1
@@ -62,7 +64,7 @@ function fish_prompt
 	set -l encoding_test "🧟" #if we see the character correctly, we are in an UTF-8 term
 
 	echo -n "["(set_color red)"$encoding_test|"(set_color normal)
-	prompt_status
+	prompt_status $_display_status
 	prompt_context
 	echo -n " "(set_color blue)(prompt_pwd)(set_color normal)"]"
 	spaceship_ruby
