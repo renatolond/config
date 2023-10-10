@@ -254,6 +254,7 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
 "autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
 autocmd BufRead,BufNewFile *.scss.erb setlocal filetype=scss.eruby
+autocmd BufRead,BufNewFile .env.* setlocal filetype=sh
 
 " enable rainbow parenthesis in c, cpp, objc, objcpp and java
 au FileType c,cpp,objc,objcpp,java,rust call rainbow#load()
