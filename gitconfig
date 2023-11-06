@@ -8,7 +8,7 @@
 	st = status
 	co = checkout
 	sdiff = diff --cached
-	slap = blame -w
+	slap = blame -w -C -C -C
 	sw = switch
 	re = restore
 [commit]
