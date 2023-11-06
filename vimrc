@@ -2,7 +2,7 @@ scriptencoding utf-8
 set encoding=utf-8
 
 " syntax highlight
-syntax on
+" syntax on
 
 " 4 spaces for indenting
 set shiftwidth=4
@@ -297,3 +297,7 @@ call s:LuaFileRelative("neovim/refactoring.lua")
 set completeopt=menu,menuone,noselect
 
 autocmd BufNewFile,BufRead *.yaml,*.yml,*.tpl if search('{{.\+}}', 'nw') | setlocal filetype=gotmpl | endif
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable
