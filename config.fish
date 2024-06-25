@@ -28,6 +28,13 @@ function prompt_status
 	end
 end
 
+function posix-source
+	for i in (cat $argv)
+		set arr (echo $i |tr = \n)
+  		set -gx $arr[1] $arr[2]
+	end
+end
+
 function fish_greeting
 end
 
@@ -69,7 +76,7 @@ function fish_prompt
 	echo -n " "(set_color blue)(prompt_pwd)(set_color normal)"]"
 	spaceship_ruby
 	fish_git_prompt
-	echo -n (set_color magenta)"❯ "(set_color normal)
+	echo -n (set_color magenta)" ❯ "(set_color normal)
 end
 function fish_right_prompt
 	echo -n (set_color yellow)"["(date '+%H:%M:%S')"]"(set_color normal)
