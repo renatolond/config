@@ -20,8 +20,27 @@ snippet @return
 snippet @raise
 	@raise [${1:Type}] ${2:Description}
 
-snippet @options
+snippet @options For keyword parameters, use `@param`, not `@option`. Describe an options hash in a method.
 	@option ${1:OptName} [${2:Type}] :${3:KeyName} ${4:Description}
+
+snippet @example Show an example snippet of code for an object. The first line is an optional title.
+	@example ${1:title}
+	#   ${2:example}
+
+snippet @yield
+	@yield [${1:params}] ${2:description}
+
+snippet @yieldparam Defines a parameter yielded by a block.
+	@yieldparam ${1:name} [${2:types}] ${3:description}
+
+snippet @yieldreturn Documents the value and type that the block is expected to return to the method.
+	@yieldreturn [${1:types}] ${2:description}
+
+snippet @see YARD @see template. "See Also" references for an object. Accepts URLs or other code objects.
+	@see ${1:name_or_URL} ${2:description}
+
+snippet @todo
+	@todo ${1:description}
 
 snippet debug "ruby 3.0 debugger"
 	require "debug"; debugger
