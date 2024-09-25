@@ -199,6 +199,8 @@ Plug 'andymass/vim-matchup'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'ThePrimeagen/refactoring.nvim'
 
+" git-related plugins
+Plug 'lewis6991/gitsigns.nvim'
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
@@ -293,6 +295,7 @@ call s:LuaFileRelative("neovim/lsp.lua")
 call s:LuaFileRelative("neovim/cmp.lua")
 call s:LuaFileRelative("neovim/luasnip.lua")
 call s:LuaFileRelative("neovim/refactoring.lua")
+call s:LuaFileRelative("neovim/gitsigns.lua")
 
 set completeopt=menu,menuone,noselect
 
