@@ -183,6 +183,8 @@ Plug 'windwp/nvim-autopairs'
 Plug 'will133/vim-dirdiff'
 Plug 'dag/vim-fish'
 
+Plug 'frazrepo/vim-rainbow'
+
 " cmp-related plugins, used for displaying the completion floating window
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
