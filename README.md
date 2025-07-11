@@ -7,4 +7,7 @@ This repo contains several configurations used by me on a daily basis. Such as:
 - a screenrc (no longer in use)
 - a tmux.conf
 - a vimrc, containing my standard vim configuration
-- a zshrc
+- some vim/neovim snippets
+- neovim config
+- a zshrc (no longer in use)
+- config.fish and related functions
