@@ -14,7 +14,7 @@ parser_config.gotmpl = {
 require('nvim-treesitter.configs').setup {
   -- one of "all", "maintained" (parsers with maintainers),
   -- or a list of languages
-  ensure_installed = { "ruby", "vim", "yaml", "python", "lua", "json", "javascript", "git_config", "gitcommit", "dockerfile", "markdown", "markdown_inline" , "gotmpl", "comment", "terraform" },
+  ensure_installed = { "ruby", "vim", "yaml", "python", "lua", "json", "javascript", "git_config", "gitcommit", "dockerfile", "markdown", "markdown_inline" , "gotmpl", "comment", "terraform", "embedded_template", "elixir" },
   highlight = {
     enable = true,
 
