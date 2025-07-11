@@ -2,6 +2,9 @@ if status is-interactive
 	# Commands to run in interactive sessions can go here
 end
 set DEFAULT_USER renatolond
+set EDITOR vim
+
+bind \cs 'history --merge ; up-or-search'
 
 function prompt_status
 	set -l _display_status $argv[1]
