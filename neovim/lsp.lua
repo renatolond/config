@@ -1,7 +1,7 @@
 require("mason").setup()
 require("mason-lspconfig").setup()
-
-local nvim_lsp = require('lspconfig')
+-- local nvim_lsp = require('lspconfig')
+local nvim_lsp = vim.lsp.config
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
@@ -34,6 +34,12 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<space>qf', function ()
+    vim.lsp.buf.code_action({
+        filter = function(a) return a.isPreferred end,
+        apply = true
+    })
+  end, bufopts)
   vim.keymap.set("n", "<space>F", function()
     vim.lsp.buf.format { async = true }
   end, bufopts)
@@ -41,28 +47,25 @@ local on_attach = function(client, bufnr)
   require "lsp_signature".on_attach()
 end
 
--- local lsp_installer = require("nvim-lsp-installer")
--- 
--- lsp_installer.on_server_ready(function (server)
---     local opts = {}
---     if (server.name == "grammarly") then
--- 		opts.filetypes = { "markdown", "rst", "html" } -- add the filetypes you want grammarly to start on here
---     end
---     server:setup(opts)
--- end)
-
 -- requires cmp_nvim_lsp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "solargraph" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
+local servers = {
+    { "solargraph",
+    on_attach =  on_attach,
+    capabilities = capabilities,
     flags = {
-      debounce_text_changes = 150,
+        debounce_text_changes = 150,
     },
-    capabilities = capabilities
-  }
+
+}
+}
+for _, lsp in pairs(servers) do
+    local name, config = lsp[1], lsp[2]
+    vim.lsp.enable(name)
+    if config then
+        vim.lsp.config(name, config)
+    end
 end
