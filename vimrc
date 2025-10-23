@@ -165,8 +165,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin()
 Plug 'tpope/vim-fugitive'
 Plug 'bling/vim-airline'
-Plug 'L3MON4D3/LuaSnip', {'tag': 'v1.*'}
-Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'honza/vim-snippets' " Add snippets for the engine
 Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdtree'
@@ -175,34 +173,43 @@ Plug 'tpope/vim-abolish'
 Plug 'Shougo/vimshell'
 Plug 'andrewradev/splitjoin.vim'
 Plug 'lmeijvogel/vim-yaml-helper'
-Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate'}
-Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'ray-x/lsp_signature.nvim'
-Plug 'windwp/nvim-autopairs'
 Plug 'will133/vim-dirdiff'
 Plug 'dag/vim-fish'
 
 Plug 'frazrepo/vim-rainbow'
 
-" cmp-related plugins, used for displaying the completion floating window
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-
-" Treesiter related, for syntax
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-Plug 'nvim-treesitter/playground'
-Plug 'ellisonleao/gruvbox.nvim'
 Plug 'andymass/vim-matchup'
 
-" refactoring-related plugins
-Plug 'nvim-lua/plenary.nvim'
-Plug 'ThePrimeagen/refactoring.nvim'
+if has("nvim")
+  Plug 'L3MON4D3/LuaSnip', {'tag': 'v1.*'}
+  Plug 'saadparwaiz1/cmp_luasnip'
 
-" git-related plugins
-Plug 'lewis6991/gitsigns.nvim'
+  Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate'}
+  Plug 'williamboman/mason-lspconfig.nvim'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'ray-x/lsp_signature.nvim'
+  Plug 'windwp/nvim-autopairs'
+
+  " cmp-related plugins, used for displaying the completion floating window
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+
+  " Treesiter related, for syntax
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+  Plug 'nvim-treesitter/playground'
+  Plug 'ellisonleao/gruvbox.nvim'
+
+  " refactoring-related plugins
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'ThePrimeagen/refactoring.nvim'
+
+  " git-related plugins
+  Plug 'lewis6991/gitsigns.nvim'
+else
+  Plug 'morhetz/gruvbox'
+end
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
@@ -292,12 +299,14 @@ set tabpagemax=80
 " Extended matching of begin/end in languages
 " packadd! matchit
 
+if has("nvim")
 call s:LuaFileRelative("neovim/treesitter.lua")
 call s:LuaFileRelative("neovim/lsp.lua")
 call s:LuaFileRelative("neovim/cmp.lua")
 call s:LuaFileRelative("neovim/luasnip.lua")
 call s:LuaFileRelative("neovim/refactoring.lua")
 call s:LuaFileRelative("neovim/gitsigns.lua")
+end
 
 set completeopt=menu,menuone,noselect
 
