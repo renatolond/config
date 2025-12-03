@@ -2,7 +2,7 @@ if status is-interactive
 	# Commands to run in interactive sessions can go here
 end
 set DEFAULT_USER renatolond
-set EDITOR vim
+set EDITOR nvim
 
 bind \cs 'history --merge ; up-or-search'
 
