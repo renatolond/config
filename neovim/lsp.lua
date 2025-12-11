@@ -53,15 +53,18 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = {
-    { "solargraph",
-    on_attach =  on_attach,
-    capabilities = capabilities,
-    flags = {
-        debounce_text_changes = 150,
-    },
+    {
+        "solargraph",
+        {
+            on_attach =  on_attach,
+            capabilities = capabilities,
+            flags = {
+                debounce_text_changes = 150,
+            },
+        }
+    }
+}
 
-}
-}
 for _, lsp in pairs(servers) do
     local name, config = lsp[1], lsp[2]
     vim.lsp.enable(name)
