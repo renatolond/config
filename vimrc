@@ -172,7 +172,6 @@ Plug 'rhysd/vim-crystal'
 Plug 'tpope/vim-abolish'
 Plug 'Shougo/vimshell'
 Plug 'andrewradev/splitjoin.vim'
-Plug 'lmeijvogel/vim-yaml-helper'
 Plug 'will133/vim-dirdiff'
 Plug 'dag/vim-fish'
 
@@ -198,6 +197,7 @@ if has("nvim")
 
   " Treesiter related, for syntax
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+  Plug 'nvim-treesitter/nvim-treesitter-context'
   Plug 'nvim-treesitter/playground'
   Plug 'ellisonleao/gruvbox.nvim'
 
