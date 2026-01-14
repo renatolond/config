@@ -17,9 +17,9 @@
 	smudge = unexpand --tabs=2 --first-only
 	clean = expand --tabs=2 --initial
 [merge]
-	tool = vimdiff
+	tool = nvimdiff
 [diff]
-	tool = vimdiff
+	tool = nvimdiff
 [mergetool]
 	prompt = false
 [difftool]
