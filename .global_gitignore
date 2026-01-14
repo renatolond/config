@@ -63,4 +63,4 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-
+.rspec-local
